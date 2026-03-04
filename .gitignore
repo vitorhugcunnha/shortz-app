@@ -1,0 +1,24 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Diretorio de dependencias
+node_modules/
+jspm_packages/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Credenciais
+.env
+.env.local
+
+# Builds
+dist/
+build/
