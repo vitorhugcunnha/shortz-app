@@ -1,16 +1,28 @@
 var express = require('express');
 var router = express.Router();
+const userController = require('../modules/user/userController');
+const authMiddleware = require('../middlewares/auth');
 
-/* requisacao GET para a home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function (req, res, next) {
+   res.render('index', { title: 'Vídeos Curtos e Engajadores' });
 });
 
-// requisicao GET para registro formulario de registro
+router.get('/register', (req, res) => {
+   res.render('register', { title: 'Criar Conta' });
+});
 
-router.get('/register', function(req, res, next) {
-  res.render('register');
-} );
+router.post('/register', userController.register);
 
+router.get('/login', (req, res) => {
+   res.render('login', { title: 'Entrar' });
+});
+
+router.post('/login', userController.login);
+
+router.get('/logout', userController.logout);
+
+router.get('/feed', authMiddleware, (req, res) => {
+   res.render('home', { user: req.session.user });
+});
 
 module.exports = router;
