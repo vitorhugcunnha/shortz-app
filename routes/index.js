@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const userController = require('../modules/user/userController');
 const authMiddleware = require('../middlewares/auth');
+const upload = require('../middlewares/multer');
 
 router.get('/', function (req, res, next) {
    res.render('index', { title: 'Vídeos Curtos e Engajadores' });
@@ -21,8 +22,17 @@ router.post('/login', userController.login);
 
 router.get('/logout', userController.logout);
 
-router.get('/feed', authMiddleware, (req, res) => {
-   res.render('home', { user: req.session.user });
+
+router.get('/feed', authMiddleware, async (req, res) => {
+    const user = await userController.getProfile(req.session.user.id);
+    res.render('home', { user });
 });
+
+router.get('/profile/edit', authMiddleware, async (req, res) => {
+    const user = await userController.getProfile(req.session.user.id);
+    res.render('edit-profile', { user });
+});
+
+router.post('/profile/edit', authMiddleware, upload.single('profilePicture'), userController.updateProfile);
 
 module.exports = router;
