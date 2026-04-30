@@ -4,8 +4,8 @@ const userController = require('../modules/user/userController');
 const authMiddleware = require('../middlewares/auth');
 const upload = require('../middlewares/multer');
 
-router.get('/', function (req, res, next) {
-   res.render('index', { title: 'Vídeos Curtos e Engajadores' });
+router.get("/", function (req, res, next) {
+  res.render("landing", { title: "Vídeos Curtos e Engajadores" });
 });
 
 router.get('/register', (req, res) => {
@@ -23,11 +23,13 @@ router.post('/login', userController.login);
 router.get('/logout', userController.logout);
 
 
+// Rota do feed
 router.get('/feed', authMiddleware, async (req, res) => {
     const user = await userController.getProfile(req.session.user.id);
     res.render('home', { user });
 });
 
+// Rota de edição de perfil
 router.get('/profile/edit', authMiddleware, async (req, res) => {
     const user = await userController.getProfile(req.session.user.id);
     res.render('edit-profile', { user });
