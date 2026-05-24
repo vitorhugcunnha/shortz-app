@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const userController = require('../modules/user/userController');
+const userController = require('../modules/users/userController');
 const authMiddleware = require('../middlewares/auth');
-const upload = require('../middlewares/multer');
+const upload = require('../middlewares/profileMulter');
 
 router.get("/", function (req, res, next) {
   res.render("landing", { title: "Vídeos Curtos e Engajadores" });

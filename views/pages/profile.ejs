@@ -46,7 +46,8 @@
                         <div class="col-6 col-md-4 col-lg-4">
                             <div class="video-card">
                                 <a href="/video/<%= video.id %>">
-                                    <div class="thumbnail-placeholder" style="background-image: url(/uploads/covers/<%= video.thumbnailPath %>);">
+                                    <div class="thumbnail-placeholder" 
+                                    style="background-image: url('/uploads/covers/<%= video.thumbnailPath %>')"
                                         <i class="bi bi-play-circle play-icon"></i>
                                         <span class="badge-views"><i class="bi bi-eye"></i> <%= video.views %></span>
                                     </div>
